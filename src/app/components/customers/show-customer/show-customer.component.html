@@ -1,0 +1,111 @@
+<div class="container mt-5">
+  <div class="row">
+    <!-- Right side -->
+    <div class="col-md-8">
+      <ng-container *ngIf="customerModelObservable | async as customer">
+        <div class="card shadow">
+          <div class="card-header text-center text-primary">
+            <b>CUSTOMER</b>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <!-- face one -->
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label><b style="color:#000000">Firstname :</b></label> {{customer.firstname}}
+                </div>
+                <div class="mb-3">
+                  <label><b style="color:#000000">Name :</b></label> {{customer.name}}
+                </div>
+                <div class="mb-3">
+                  <label><b style="color:#000000">Date of birth :</b></label> {{customer.dateOfBirth | date:'dd/MM/yyyy'}}
+                </div>
+                <div class="mb-3">
+                  <label><b style="color:#000000">Place of birth :</b></label> {{customer.placeOfBirth}}
+                </div>
+                <div class="mb-3">
+                  <label><b style="color:#000000">Nationality :</b></label> {{customer.nationality}}
+                </div>
+              </div>
+              <!-- face two -->
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label><b style="color:#000000">Passport/NIC :</b></label> {{customer.nic}}
+                </div>
+                <div class="mb-3">
+                  <label><b style="color:#000000">Sex :</b></label> {{customer.sex}}
+                </div>
+                <div class="mb-3">
+                  <label><b style="color:#000000">Create at :</b></label> {{customer.creation | date:'dd/MM/yyyy - HH:mm:ss'}}
+                </div>
+                <div class="mb-3">
+                  <label><b style="color:#000000">Last Update :</b></label> {{customer.lastUpdate | date:'dd/MM/yyyy - HH:mm:ss'}}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card-footer">
+            <div class="row">
+              <!-- face C -->
+              <div class="col-md-6">
+                <div class="mb-1">
+                  <button class="btn btn-sm btn-primary" (click)="getOut()">return</button>
+                </div>
+              </div>
+              <!-- face D -->
+              <div class="col-md-6">
+                <div class="mb-1 text-end">
+                  <button class="btn btn-sm btn-warning" (click)="gotoUpdateCustomerComponent(customer.id)">update customer</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+
+    <!-- Left side -->
+    <div class="col-md-4">
+      <ng-container *ngIf="accountModelObservable | async as account">
+        <div class="card shadow">
+          <div class="card-header text-center text-primary">
+            <b>ACCOUNT</b>
+          </div>
+          <div class="card-body">
+            <div class="mb-3">
+              <label><b style="color:#000000">ID :</b></label> {{account.id}}
+            </div>
+            <div class="mb-3">
+              <label><b style="color:#000000">Balance :</b></label> {{account.balance}}
+            </div>
+            <div class="mb-3">
+              <label><b style="color:#000000">Status :</b></label> {{account.status}}
+            </div>
+            <div class="mb-3">
+              <label><b style="color:#000000">Create at :</b></label> {{account.creation | date:'dd/MM/yyyy - HH:mm:ss'}}
+            </div>
+            <div class="mb-3">
+              <label><b style="color:#000000">Last update :</b></label> {{account.lastUpdate | date:'dd/MM/yyyy - HH:mm:ss'}}
+            </div>
+          </div>
+          <div class="card-footer">
+            <div class="row">
+              <!-- face C -->
+              <div class="col-md-6">
+                <div class="mb-1">
+                  <button class="btn btn-sm btn-warning" (click)="handleChangeStatus(account.id, account.status)">change status</button>
+                </div>
+              </div>
+              <!-- face D -->
+              <div class="col-md-6">
+                <div class="mb-1 text-end">
+                  <button class="btn btn-sm btn-primary" (click)="gotoShowAccountComponent()">operations</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>

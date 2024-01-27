@@ -1,1 +1,23 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap');
+
+.text-ubuntu{
+  font-family: 'Ubuntu', sans-serif;
+}
+
+.text-crimson{
+  color: crimson;
+}
+
+.btn-crimson {
+  background-color: crimson;
+  color: crimson;
+}
+
+.bg-crimson{
+  background-color: crimson;
+}
+
+.required-field {
+  color: red;
+}
