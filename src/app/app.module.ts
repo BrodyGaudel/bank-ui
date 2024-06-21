@@ -3,37 +3,45 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import {HttpClientModule} from "@angular/common/http";
-import {NgOptimizedImage} from "@angular/common";
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import { AddCustomerComponent } from './components/customers/add-customer/add-customer.component';
-import { UpdateCustomerComponent } from './components/customers/update-customer/update-customer.component';
-import { ShowCustomerComponent } from './components/customers/show-customer/show-customer.component';
-import { ListCustomerComponent } from './components/customers/list-customer/list-customer.component';
-import { ShowAccountComponent } from './components/accounts/show-account/show-account.component';
-import { ShowOperationComponent } from './components/accounts/show-operation/show-operation.component';
+import { CustomerCreateComponent } from './components/customers/customer-create/customer-create.component';
+import { CustomerUpdateComponent } from './components/customers/customer-update/customer-update.component';
+import { CustomerDetailComponent } from './components/customers/customer-detail/customer-detail.component';
+import { CustomerListComponent } from './components/customers/customer-list/customer-list.component';
+import { CustomerSearchComponent } from './components/customers/customer-search/customer-search.component';
+import { AccountOperationComponent } from './components/account/account-operation/account-operation.component';
+import { AccountDetailsComponent } from './components/account/account-details/account-details.component';
+import { OperationDetailComponent } from './components/account/operation-detail/operation-detail.component';
+import { OperationListComponent } from './components/account/operation-list/operation-list.component';
+import { LoginComponent } from './components/security/login/login.component';
+import { ForbiddenComponent } from './components/security/forbidden/forbidden.component';
+import {ReactiveFormsModule} from "@angular/forms";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
+import {HttpErrorInterceptor} from "./services/handler/http-error-interceptor";
 
 @NgModule({
   declarations: [
     AppComponent,
-    AddCustomerComponent,
-    UpdateCustomerComponent,
-    ShowCustomerComponent,
-    ListCustomerComponent,
-    ShowAccountComponent,
-    ShowOperationComponent
+    CustomerCreateComponent,
+    CustomerUpdateComponent,
+    CustomerDetailComponent,
+    CustomerListComponent,
+    CustomerSearchComponent,
+    AccountOperationComponent,
+    AccountDetailsComponent,
+    OperationDetailComponent,
+    OperationListComponent,
+    LoginComponent,
+    ForbiddenComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgbModule,
     ReactiveFormsModule,
-    FormsModule,
     HttpClientModule,
-    NgOptimizedImage,
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

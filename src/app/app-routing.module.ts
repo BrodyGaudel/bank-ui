@@ -1,20 +1,30 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {ShowOperationComponent} from "./components/accounts/show-operation/show-operation.component";
-import {AddCustomerComponent} from "./components/customers/add-customer/add-customer.component";
-import {ListCustomerComponent} from "./components/customers/list-customer/list-customer.component";
-import {UpdateCustomerComponent} from "./components/customers/update-customer/update-customer.component";
-import {ShowCustomerComponent} from "./components/customers/show-customer/show-customer.component";
-import {ShowAccountComponent} from "./components/accounts/show-account/show-account.component";
+import {LoginComponent} from "./components/security/login/login.component";
+import {CustomerCreateComponent} from "./components/customers/customer-create/customer-create.component";
+import {CustomerDetailComponent} from "./components/customers/customer-detail/customer-detail.component";
+import {CustomerListComponent} from "./components/customers/customer-list/customer-list.component";
+import {CustomerSearchComponent} from "./components/customers/customer-search/customer-search.component";
+import {CustomerUpdateComponent} from "./components/customers/customer-update/customer-update.component";
+import {ForbiddenComponent} from "./components/security/forbidden/forbidden.component";
+import {AccountDetailsComponent} from "./components/account/account-details/account-details.component";
+import {AccountOperationComponent} from "./components/account/account-operation/account-operation.component";
+import {OperationDetailComponent} from "./components/account/operation-detail/operation-detail.component";
+import {OperationListComponent} from "./components/account/operation-list/operation-list.component";
 
 const routes: Routes = [
-  {path: '', redirectTo: 'account', pathMatch: 'full' },
-  {path: 'account', component: ShowAccountComponent},
-  {path: 'operation', component: ShowOperationComponent},
-  {path: 'add-customer', component: AddCustomerComponent},
-  {path: 'list-customer', component: ListCustomerComponent},
-  {path: 'update-customer', component: UpdateCustomerComponent},
-  {path: 'show-customer/:id', component: ShowCustomerComponent},
+  {path: '', redirectTo: 'profile', pathMatch: 'full' },
+  {path: 'authentication', component: LoginComponent},
+  {path: 'forbidden', component: ForbiddenComponent},
+  {path: 'customer-create', component: CustomerCreateComponent},
+  {path: 'customer-detail/:id', component: CustomerDetailComponent},
+  {path: 'customer-list', component: CustomerListComponent},
+  {path: 'customer-search', component: CustomerSearchComponent},
+  {path: 'customer-update/:id', component: CustomerUpdateComponent},
+  {path: 'account-details', component: AccountDetailsComponent},
+  {path: 'account-operation', component: AccountOperationComponent},
+  {path: 'operation-detail', component: OperationDetailComponent},
+  {path: 'operation-list', component: OperationListComponent},
 ];
 
 @NgModule({

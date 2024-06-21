@@ -1,0 +1,71 @@
+<div class="container mt-5">
+  <ng-container *ngIf="!errorFlag; else loadTemplate">
+    <div class="card col-md-8 offset-2 shadow" *ngIf="customerObservable | async as customer">
+      <div class="card-header">
+        <h6 class="text-info text-center">Informations sur les clients</h6>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-6">
+            <b>Prénom : </b>{{customer.firstname}}
+            <hr>
+            <b>Nom : </b>{{customer.lastname}}
+            <hr>
+            <b>Date de naissance : </b>{{customer.dateOfBirth | date:'dd/MM/yyyy' }}
+            <hr>
+            <b>Lieux de naissance : </b>{{customer.placeOfBirth}}
+            <hr>
+            <b>Sexe : </b>{{showSex(customer.sex)}}
+            <hr>
+            <b>Nationalité : </b>{{customer.nationality}}
+          </div>
+          <!-- middle -->
+          <div class="col-md-6">
+            <b>Numéro de Passeport/CIN : </b>{{customer.cin}}
+            <hr>
+            <b>Email : </b>{{customer.email}}
+            <hr>
+            <b>Date de création : </b>{{customer.createdDate | date:'dd/MM/yyyy - HH:mm:ss' }}
+            <hr>
+            <b>Crée par : </b>{{customer.creator}}
+            <hr>
+            <b>Date de dernière modification : </b>{{customer.lastModifiedDate | date:'dd/MM/yyyy - HH:mm:ss' }}
+            <hr>
+            <b>Dernière modification effectué par </b>{{customer.lastModifier}}
+          </div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="row">
+          <div class="col-md-6 text-center">
+            <button class="btn btn-danger" (click)="deleteCustomer(customer.id)"><i class="bi bi-trash3"> Supprimer</i></button>
+          </div>
+          <div class="col-md-6 text-center">
+            <button class="btn btn-info" (click)="updateCustomer(customer.id)"><i class="bi bi-pencil-square"> Modifier</i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+  <ng-template #loadTemplate>
+    <div class="error mb-3 alert alert-info" role="alert">
+      <h6>Code d'erreur: {{ errorCode }}</h6>
+      <p>{{ errorMessage }}</p>
+      <p>{{ errorDescription }}</p>
+      <div *ngIf="validationErrors.size > 0">
+        <hr>
+        <h6>Validation Errors:</h6>
+        <ul>
+          <li *ngFor="let validationError of validationErrors">{{ validationError }}</li>
+        </ul>
+      </div>
+      <div *ngIf="errors.size > 0">
+        <hr>
+        <h6>Field Errors:</h6>
+        <ul>
+          <li *ngFor="let key of errors.keys()">{{ key }}: {{ errors.get(key) }}</li>
+        </ul>
+      </div>
+    </div>
+  </ng-template>
+</div>

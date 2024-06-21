@@ -1,0 +1,61 @@
+<div class="container mt-5">
+  <div class="card col-md-8 offset-2 shadow">
+    <div class="card-header text-info">
+      <h6 class="text-center">Recherche des clients</h6>
+    </div>
+    <div class="card-body">
+      <div class="mb-3">
+        <form [formGroup]="searchCustomerFormGroup" (ngSubmit)="handleSearchCustomer()">
+          <div class="form-group mb-3 input-group">
+            <input id="keyword" formControlName="keyword" type="text" class="form-control" [class.is-invalid]="searchCustomerFormGroup.get('keyword')?.invalid && searchCustomerFormGroup.get('keyword')?.touched">
+            <button type="submit" class="btn btn-info" [disabled]="searchCustomerFormGroup.invalid"><i class="bi bi-search"></i> Search</button>
+            <div *ngIf="searchCustomerFormGroup.get('keyword')?.invalid && searchCustomerFormGroup.get('keyword')?.touched" class="invalid-feedback">Le mot clé est obligatoire (cin, nom, prénom, email) et ne doit pas dépasser 256 caractères</div>
+          </div>
+        </form>
+      </div>
+      <div class="mb-2">
+        <ng-container *ngIf="customersObservable | async as customerPage; else loadCustomerTemplate">
+          <hr>
+          <div *ngIf="!errorFlag">
+            <table class="table table-striped">
+              <thead>
+                <th class="text-start">CIN</th>
+                <th class="text-center">Prénom</th>
+                <th class="text-center">Nom</th>
+                <th class="text-end">Email</th>
+              </thead>
+              <tbody>
+                <tr *ngFor="let customer of customerPage.customers">
+                  <td class="text-start">{{customer.cin}}</td>
+                  <td class="text-center">{{customer.firstname}}</td>
+                  <td class="text-center">{{customer.lastname}}</td>
+                  <td class="text-center">{{customer.email}}</td>
+                  <td class="text-end">
+                    <button class="btn btn-outline-info" (click)="gotoCustomerDetailComponent(customer)">
+                      <i class="bi bi-three-dots-vertical"></i>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <p class="d-inline-flex gap-1">
+              <button type="button" class="btn btn-info" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;" (click)="gotoPreviousPage(customerPage)">
+                <i class="bi bi-caret-left"> Précedent</i>
+              </button>
+              <button type="button" class="btn btn-info" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;" (click)="gotoNextPage(customerPage)">
+                <i class="bi bi-caret-right"> Suivant</i>
+              </button>
+            </p>
+          </div>
+        </ng-container>
+        <ng-template #loadCustomerTemplate>
+          <div class="alert alert-warning shadow" role="alert" *ngIf="errorFlag">
+            Code : {{errorCode}}<br>
+            Message : {{errorMessage}}<br>
+            Description : {{errorDescription}}
+          </div>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</div>
