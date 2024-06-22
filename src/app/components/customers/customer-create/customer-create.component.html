@@ -93,6 +93,27 @@
             </div>
           </div>
         </div>
+        <div class="form-group mb-3">
+          <label for="currency">Devise</label>
+          <select id="currency" formControlName="currency" class="form-control" [class.is-invalid]="createCustomerFormGroup.get('currency')?.invalid && createCustomerFormGroup.get('currency')?.touched">
+            <option value="" disabled>Sélectionnez la devise du compte bancaire</option>
+            <option value="TND">Dinar Tunisien (TND)</option>
+            <option value="USD">Dollar Américain (USD)</option>
+            <option value="CAD">Dollar Canadien (CAD)</option>
+            <option value="EUR">Euro (EUR)</option>
+            <option value="CHF">Franc Suisse (CHF)</option>
+            <option value="XAF">Franc CFA (XAF)</option>
+            <option value="XOF">Franc CFA (XOF)</option>
+            <option value="NGN">Naira (NGN)</option>
+            <option value="ZAR">Rand sud-africain (ZAR)</option>
+            <option value="RUB">Rubble Russe (RUB)</option>
+            <option value="CNY">Yen chinois (CNY)</option>
+            <option value="MAD">Dirham marocain (MAD)</option>
+          </select>
+          <div *ngIf="createCustomerFormGroup.get('currency')?.invalid && createCustomerFormGroup.get('currency')?.touched" class="invalid-feedback">
+            La devise du compte bancaire est obligatoire.
+          </div>
+        </div>
         <div class="mb-3">
           <button type="submit" class="btn btn-info" [disabled]="!createCustomerFormGroup.valid"><i class="bi bi-floppy"> Enregistrer</i></button>
         </div>

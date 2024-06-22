@@ -37,10 +37,13 @@
       </div>
       <div class="card-footer">
         <div class="row">
-          <div class="col-md-6 text-center">
+          <div class="col-md-4 text-center">
+            <button class="btn btn-info" (click)="gotoAccountDetailComponent(customer.id)"><i class="bi bi-pencil-square"> Compte</i></button>
+          </div>
+          <div class="col-md-4 text-center">
             <button class="btn btn-danger" (click)="deleteCustomer(customer.id)"><i class="bi bi-trash3"> Supprimer</i></button>
           </div>
-          <div class="col-md-6 text-center">
+          <div class="col-md-4 text-center">
             <button class="btn btn-info" (click)="updateCustomer(customer.id)"><i class="bi bi-pencil-square"> Modifier</i></button>
           </div>
         </div>

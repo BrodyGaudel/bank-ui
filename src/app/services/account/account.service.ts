@@ -55,10 +55,10 @@ export class AccountService {
     return this.http.get<AccountResponse>(url, {headers: headers});
   }
 
-  public findAllOperationsByAccountId(accountId: string, page: number, size: number): Observable<Array<AccountResponse>> {
+  public findAllOperationsByAccountId(accountId: string, page: number, size: number): Observable<Array<OperationResponse>> {
     const url: string = this.queryHost + '/get-all-operations?accountId=' + accountId + '&page=' + page + '&size=' + size;
     const headers: HttpHeaders = this.authService.getHttpHeaders();
-    return this.http.get<Array<AccountResponse>>(url, {headers: headers});
+    return this.http.get<Array<OperationResponse>>(url, {headers: headers});
   }
 
   public findOperationById(operationId: string): Observable<OperationResponse> {

@@ -88,4 +88,8 @@ export class CustomerDetailComponent implements OnInit {
   updateCustomer(id: string): void {
     this.router.navigate(["customer-update", id]).then();
   }
+
+  gotoAccountDetailComponent(id: string) {
+    this.router.navigate(['account-detail', id]).then();
+  }
 }

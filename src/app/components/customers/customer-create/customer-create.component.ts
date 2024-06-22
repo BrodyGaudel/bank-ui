@@ -5,6 +5,7 @@ import {Router} from "@angular/router";
 import {CustomerRequest} from "../../../dtos/customer/customer.request";
 import {ErrorHandlerService} from "../../../services/handler/error-handler.service";
 import {CreateAccountRequest} from "../../../dtos/account/create-account.request";
+import {AccountService} from "../../../services/account/account.service";
 
 @Component({
   selector: 'app-customer-create',
@@ -24,7 +25,8 @@ export class CustomerCreateComponent implements OnInit {
   constructor(private fb: FormBuilder,
               private customerService: CustomerService,
               private router: Router,
-              private errorHandlerService: ErrorHandlerService) {}
+              private errorHandlerService: ErrorHandlerService,
+              private accountService: AccountService) {}
 
   ngOnInit(): void {
     this.initializeCustomerFormGroup();
@@ -40,7 +42,8 @@ export class CustomerCreateComponent implements OnInit {
       nationality: this.fb.control(null, [Validators.required, Validators.minLength(2), Validators.maxLength(100)]),
       sex: this.fb.control(null, [Validators.required]),
       cin: this.fb.control(null, [Validators.required, Validators.minLength(6), Validators.maxLength(100)]),
-      email: this.fb.control(null, [Validators.required, Validators.email])
+      email: this.fb.control(null, [Validators.required, Validators.email]),
+      currency: this.fb.control(null, [Validators.required, Validators.minLength(3), Validators.maxLength(3)]),
     });
   }
 
@@ -79,6 +82,16 @@ export class CustomerCreateComponent implements OnInit {
     let request: CreateAccountRequest = new CreateAccountRequest();
     request.customerId = customerId;
     request.currency = this.createCustomerFormGroup.value.currency;
+    this.accountService.create(request).subscribe({
+      next: response => {
+        console.log(response);
+        alert("Compte bancaire bien créer avec RIB :"+response);
+      },
+      error: err => {
+        console.log(err);
+        this.errorFlag = true;
+      }
+    });
   }
 
 

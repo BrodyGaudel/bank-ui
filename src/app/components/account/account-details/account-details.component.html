@@ -1,1 +1,51 @@
-<p>account-details works!</p>
+<div class="container mt-5">
+  <ng-container *ngIf="!errorFlag; else loadTemplate">
+    <div class="card col-md-6 offset-3 shadow" *ngIf="accountObservable | async as account">
+      <div class="card-header">
+        <h6 class="text-info text-center">Informations sur le compte bancaire</h6>
+      </div>
+      <div class="card-body">
+        <b>ID : </b>{{account.id}}
+        <hr>
+        <b>Devise : </b>{{account.currency}}
+        <hr>
+        <b>Solde : </b>{{account.balance}}
+        <hr>
+        <b>Status : </b>{{translateStatus(account.status)}}
+        <hr>
+        <b>Date de création : </b>{{account.createdDate | date:'dd/MM/yyyy - HH:mm:ss' }}
+      </div>
+      <div class="card-footer">
+        <div class="row">
+          <div class="col-md-6 text-center">
+            <button class="btn btn-sm btn-info" (click)="gotoOperationListComponent(account)">Operations</button>
+          </div>
+          <div class="col-md-6 text-center">
+            <button class="btn btn-sm btn-info" (click)="gotoAccountDetailComponent(account)">Client</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+  <ng-template #loadTemplate>
+    <div class="error mb-3 alert alert-info" role="alert">
+      <h6>Code d'erreur: {{ errorCode }}</h6>
+      <p>{{ errorMessage }}</p>
+      <p>{{ errorDescription }}</p>
+      <div *ngIf="validationErrors.size > 0">
+        <hr>
+        <h6>Validation Errors:</h6>
+        <ul>
+          <li *ngFor="let validationError of validationErrors">{{ validationError }}</li>
+        </ul>
+      </div>
+      <div *ngIf="errors.size > 0">
+        <hr>
+        <h6>Field Errors:</h6>
+        <ul>
+          <li *ngFor="let key of errors.keys()">{{ key }}: {{ errors.get(key) }}</li>
+        </ul>
+      </div>
+    </div>
+  </ng-template>
+</div>
