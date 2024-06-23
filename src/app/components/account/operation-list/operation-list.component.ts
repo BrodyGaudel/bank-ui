@@ -54,7 +54,7 @@ export class OperationListComponent implements OnInit {
     this.operationsObservable = this.accountService.findAllOperationsByAccountId(id,p,s).pipe(
       tap(response => {
         this.errorFlag = false;
-        console.log(response.length)
+        console.log(response.length);
       }),
       catchError(error => {
         this.errorHandlerService.handleError(error);

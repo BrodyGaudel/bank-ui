@@ -8,6 +8,7 @@ import {DebitAccountRequest} from "../../dtos/account/debit-account.request";
 import {UpdateAccountRequest} from "../../dtos/account/update-account.request";
 import {AccountResponse} from "../../dtos/account/account.response";
 import {OperationResponse} from "../../dtos/account/operation.response";
+import {TransferRequest} from "../../dtos/account/transfer.request";
 
 @Injectable({
   providedIn: 'root'
@@ -28,13 +29,19 @@ export class AccountService {
   public credit(request: CreditAccountRequest): Observable<string> {
     const url: string = this.commandHost + "/credit"
     const headers: HttpHeaders = this.authService.getHttpHeaders();
-    return this.http.post<string>(url, request, {headers: headers});
+    return this.http.put<string>(url, request, {headers: headers});
   }
 
   public debit(request: DebitAccountRequest): Observable<string> {
     const url: string = this.commandHost + "/debit"
     const headers: HttpHeaders = this.authService.getHttpHeaders();
-    return this.http.post<string>(url, request, {headers: headers});
+    return this.http.put<string>(url, request, {headers: headers});
+  }
+
+  public transfer(request: TransferRequest): Observable<string> {
+    const url: string = this.commandHost + "/transfer"
+    const headers: HttpHeaders = this.authService.getHttpHeaders();
+    return this.http.put<string>(url, request, {headers: headers});
   }
 
   public update(request: UpdateAccountRequest): Observable<string> {

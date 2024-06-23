@@ -1,6 +1,6 @@
 export class TransferRequest{
   accountIdFrom!: string;
   accountIdTo!: string;
-  amount!: string;
+  amount!: number;
   description!: string;
 }
