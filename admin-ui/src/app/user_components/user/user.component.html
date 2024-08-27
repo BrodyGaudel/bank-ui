@@ -1,0 +1,52 @@
+<div class="container mt-5">
+  <div class="card shadow" *ngIf="userObservable | async as user">
+    <div class="card-header text-center text-bold">
+      DETAILS OF THE USER'S INFORMATION
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-6">
+          <b>Firstname : </b>{{user.profile.firstname}}
+          <hr>
+          <b>Lastname : </b>{{user.profile.lastname}}
+          <hr>
+          <b>Gender : </b>{{user.profile.gender}}
+          <hr>
+          <b>Date Of Birth : </b>{{user.profile.dateOfBirth | date: 'dd/MM/yyyy'}}
+          <hr>
+          <b>Place Of Birth : </b>{{user.profile.placeOfBirth}}
+          <hr>
+          <b>Nationality : </b>{{user.profile.nationality}}
+          <hr>
+          <b>CIN : </b>{{user.profile.cin}}
+        </div>
+        <div class="col-md-6">
+          <b>Username : </b>{{user.username}}
+          <hr>
+          <b>Email : </b>{{user.email}}
+          <hr>
+          <b>Enabled : </b><span class="{{styleEnabled(user.enabled)}}">{{textEnabled(user.enabled)}}</span>
+          <hr>
+          <b>Created by : </b>{{user.createBy}}
+          <hr>
+          <b>Created date : </b>{{user.createdDate| date: 'dd/MM/yyyy at HH:mm'}}
+          <hr>
+          <b>Last modified by : </b>{{user.lastModifiedBy}}
+          <hr>
+          <b>Last modified date : </b>{{user.lastModifiedDate| date: 'dd/MM/yyyy at HH:mm'}}
+        </div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <button class="btn btn-outline-info btn-sm" (click)="enabledOrDisabled(user.id)">Enabled Or Disabled</button>
+
+    </div>
+  </div>
+  <div *ngIf="errorFlag">
+    <div class="alert alert-warning text-primary" role="alert">
+      <b>Code : </b>{{errorCode}}
+      <hr>
+      <b>Message : </b>{{errorMessage}}
+    </div>
+  </div>
+</div>
